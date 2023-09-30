@@ -6,33 +6,30 @@ include('views/layout/header.php');
     <p>
         <?php
         $getCourses = new CourseController();
-        // $courses->getCoursesName();
         ?>
     </p>
-<div class="container">
-   <div class="card-deck">
-        <div class="card text-center">
-           <div class="card" style="width: 18rem;">
-            <?php
+
+  <div class="container">
+    <div class="row">
+        <?php
             $getCourse = $getCourses->getCourses();
             if (isset($getCourse['data']) && is_array($getCourse['data'])):
                 foreach ($getCourse['data'] as $item):
-            ?>
-        <img src="<?=$image = $item['Image'];?>" class="card-img-top" alt="...">
-        <div class="card-body flex-row m-10">
-            <h5 class="card-title"><?= $name = $item['Name']; ?></h5>
-            <p class="card-text">Some Description</p>
-            <a href="<?=$path = $item['Path'][0];?>" class="">Go to course</a>
-        </div>
-            <?php
+        ?>
+      <div class="col-md-3">
+        <a href="<?=$path = $item['Path'][0];?>" class="card mb-4 text-center">
+            <div class="card-body">
+              <img decoding="async"  src="<?=$image = $item['Image'];?>" class="img-fluid d-block mx-auto pt-4" width="75px" alt="...">
+              <h5 class="card-title pb-0 mb-0"><?= $name = $item['Name']; ?></h5>
+            </div>
+        </a>
+      </div>
+      <?php
             endforeach;
-            endif;
-            ?>
-         </div>
-        </div>
+          endif;
+          ?>
     </div>
-</div>
-
+  </div>
 <?php
 include('views/layout/footer.php');
 ?>
